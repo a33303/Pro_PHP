@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Мой магазин{% endblock %}</title>
+</head>
+<body>
+<p style="color: red"> <?= $msg ?></p>
+<ul>
+    <li><a href="/?c=user&a=index">Главная</a></li>
+    <li><a href="/?c=good&a=all">Каталог</a></li>
+    <li><a href="/?c=user&a=all">Все пользователи</a></li>
+    <li><a href="/?c=user&a=add">Добавить</a></li>
+</ul>
+    {% block content %}{% endblock %}
+</body>
+</html>

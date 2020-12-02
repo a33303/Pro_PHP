@@ -1,0 +1,13 @@
+{% extends "layauts/test.twig" %}
+{#{% block title %}Index{% endblock %}#}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {% for good in goods %}
+        Название: {{good.name}}<br>
+        <a href="/?c=good&a=one&id={{good.id}}">More..</a>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
