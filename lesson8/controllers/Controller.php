@@ -6,7 +6,6 @@ use App\engine\Container;
 use App\services\MenuServices;
 use App\services\renders\IRenderer;
 use App\services\Request;
-use App\services\AuthServices;
 
 
 abstract class Controller
@@ -22,7 +21,7 @@ abstract class Controller
         $this->container = $container;
     }
 
-    protected $defaultAction = 'all';
+    protected string $defaultAction = 'all';
 
     public function run($action)
     {
@@ -67,23 +66,6 @@ abstract class Controller
     protected function getId()
     {
         return (int)$this->request->get('id');
-    }
-
-    public function isAdmin()
-    {
-        $user = $this->getSession('auth');
-
-        return !empty($user->getIsAdmin());
-    }
-
-    public function methodIsGet()
-    {
-        if (!$this->isAdmin())
-        {
-            $this->request->methodIsGet();
-            return false;
-        }
-        return false;
     }
 
 

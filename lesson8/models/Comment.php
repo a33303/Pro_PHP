@@ -29,12 +29,13 @@ class Comment extends Model
         }
 
         $sql = "SELECT * FROM comment 
-            WHERE id = '{$id}',
-            name = '{$name}',
+            id = '{$id}',
             good_id = '{$good_id}',
+            name = '{$name}',
             user_id = '{$user_id}',
-            AND date = '{$date}'";
+            date = '{$date}'";
 
         return $this->getDB()->exec($sql, $params);
     }
+}
 

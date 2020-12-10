@@ -10,10 +10,10 @@ class DB
     protected $config = [
         'driver' => 'mysql',
         'host' => '127.0.0.1',
-        'dbname' => 'gbphp',
+        'dbname' => 'mysql',
         'charset' => 'UTF8',
         'userName' => 'root',
-        'password' => '',
+        'password' => 'root',
     ];
 
     protected function getConnect()

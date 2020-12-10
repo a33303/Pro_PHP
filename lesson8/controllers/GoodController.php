@@ -2,6 +2,7 @@
 namespace App\controllers;
 
 use App\models\Good;
+use App\models\Model;
 
 class GoodController extends Controller
 {
@@ -31,9 +32,24 @@ class GoodController extends Controller
 
     public function addAction()
     {
-        if ($this->methodIsGet()) {
-            return $this->render('user_add');
+        if ($this->request->methodIsGet()) {
+            return $this->render('good_add');
         }
-        $this->addUser();
+
+        $id = $this -> getId();
+        (new GoodServices())->save(
+            $id,
+            $this->request->post()
+        );
+
+        $this->setMSG('Товар добавлен');
+        header('Location: ?c=good&a=all');
+
+        return $this->render(
+            'addGood',
+            ['good' => new Good() ]
+        );
+
     }
+
 }

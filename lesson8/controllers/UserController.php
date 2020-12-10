@@ -5,7 +5,7 @@ use App\models\User;
 
 class UserController extends Controller
 {
-    protected $defaultAction = 'index';
+    protected string $defaultAction = 'index';
 
     public function indexAction()
     {
@@ -52,7 +52,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = (new User)->getOne($id);
 
-        if ($this->methodIsGet()) {
+        if ($this->request->methodIsGet()) {
             return $this->render(
                 'user_update',
                 [
@@ -71,9 +71,9 @@ class UserController extends Controller
         return '';
     }
 
-    public function addAction()
+    public function addUser()
     {
-        if ($this->methodIsGet()) {
+        if ($this->request->methodIsGet()) {
             return $this->render('user_add');
         }
 
@@ -84,6 +84,7 @@ class UserController extends Controller
 
         return '';
     }
+
 
 
 }

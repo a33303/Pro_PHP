@@ -3,7 +3,10 @@ namespace App\models;
 
 class Basket extends Model
 {
-    use TCalc;
+    public $id;
+    public $price;
+    public $name;
+
 
     protected function getTableName(): string
     {

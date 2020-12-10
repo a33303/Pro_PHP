@@ -12,7 +12,7 @@ class AuthController extends Controller
      */
     public function addAction()
     {
-        if ($this->methodIsGet()) {
+        if ($this->request->methodIsGet()) {
             return $this->render('auth_add');
         }
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
             return '';
         }
 
-        if ($this->methodIsGet()) {
+        if ($this->request->methodIsGet()) {
             return $this->render('auth_in');
         }
 
@@ -50,6 +50,8 @@ class AuthController extends Controller
         $this->setMSG('Вы авторизованы');
         $this->request->redirectOnUrl('/');
         return '';
+
+
     }
 
     /**
@@ -61,6 +63,23 @@ class AuthController extends Controller
         $this->request->setSession('user', '');
         $this->request->redirectOnUrl('/');
         return '';
+    }
+
+    public function isAdmin()
+    {
+        $user = $this->request->getSession('auth');
+
+        return !empty($user->getIsAdmin());
+    }
+
+    public function methodIsAuth()
+    {
+        if (!$this->isAdmin())
+        {
+            $this->request->methodIsGet();
+            return false;
+        }
+        return false;
     }
 
 }
