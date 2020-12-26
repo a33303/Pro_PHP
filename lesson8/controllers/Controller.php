@@ -6,8 +6,6 @@ use App\engine\Container;
 use App\services\MenuServices;
 use App\services\renders\IRenderer;
 use App\services\Request;
-use App\services\AuthServices;
-
 
 abstract class Controller
 {
@@ -50,7 +48,7 @@ abstract class Controller
 
     protected function setMSG($msg)
     {
-        $_SESSION['MSG']=$msg;
+        $_SESSION['MSG'] = $msg;
     }
 
     protected function getMSG()
@@ -69,22 +67,9 @@ abstract class Controller
         return (int)$this->request->get('id');
     }
 
-    public function isAdmin()
-    {
-        $user = $this->getSession('auth');
-
-        return !empty($user->getIsAdmin());
-    }
 
     public function methodIsGet()
     {
-        if (!$this->isAdmin())
-        {
-            $this->request->methodIsGet();
-            return false;
-        }
-        return false;
+        return $this->request->methodIsGet();
     }
-
-
 }

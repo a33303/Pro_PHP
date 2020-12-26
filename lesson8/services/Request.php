@@ -2,8 +2,6 @@
 
 namespace App\services;
 
-use App\models\User;
-
 class Request
 {
     protected $params = [
@@ -88,15 +86,5 @@ class Request
 
         return '';
     }
-
-
-    public function addUser()
-    {
-        $user = new User();
-        $user->login = $_POST['login'];
-        $user->password = $_POST['password'];
-        $user->save();
-    }
-
 }
 

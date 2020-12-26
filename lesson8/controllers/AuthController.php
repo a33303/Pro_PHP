@@ -3,11 +3,13 @@
 namespace App\controllers;
 
 use App\models\User;
+use App\services\UserServices;
 
 class AuthController extends Controller
 {
     /**
-     * Регистрация пользователя
+     * Lj,fdktybt
+     *
      * @return string
      */
     public function addAction()
@@ -23,10 +25,6 @@ class AuthController extends Controller
         return '';
     }
 
-    /**
-     * Авторизация пользователя
-     * @return string
-     */
     public function inAction()
     {
         if (!empty($this->request->getSession('user'))) {
@@ -52,10 +50,6 @@ class AuthController extends Controller
         return '';
     }
 
-    /**
-     * Окончание сессии
-     * @return string
-     */
     public function exitAction()
     {
         $this->request->setSession('user', '');

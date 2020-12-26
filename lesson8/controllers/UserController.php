@@ -52,7 +52,7 @@ class UserController extends Controller
         /** @var User $user */
         $user = (new User)->getOne($id);
 
-        if ($this->methodIsGet()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             return $this->render(
                 'user_update',
                 [
@@ -73,17 +73,22 @@ class UserController extends Controller
 
     public function addAction()
     {
-        if ($this->methodIsGet()) {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             return $this->render('user_add');
         }
 
-        $this->addUser();
+        $user = new User();
+        $user->login = $_POST['login'];
+        $user->password = $_POST['password'];
+        $user->save();
 
         $this->setMSG('Пользователь добавлен');
         header('Location: ?c=user&a=add');
 
         return '';
     }
+
+
 
 
 }

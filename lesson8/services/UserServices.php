@@ -16,4 +16,5 @@ class UserServices
         $user->password = password_hash($params['password'], PASSWORD_DEFAULT);
         $user->save();
     }
+
 }

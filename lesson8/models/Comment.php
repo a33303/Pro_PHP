@@ -15,26 +15,5 @@ class Comment extends Model
         return 'comment';
     }
 
-    protected function addComment()
-    {
-        $params = [];
-        $fields = [];
-        foreach ($this as $key => $value) {
-            if (!isset($value) || $key == 'id') {
-                continue;
-            }
-            $placeholder = ":" . $key;
-            $params[$placeholder] = $value;
-            $fields[] = $key;
-        }
-
-        $sql = "SELECT * FROM comment 
-            WHERE id = '{$id}',
-            name = '{$name}',
-            good_id = '{$good_id}',
-            user_id = '{$user_id}',
-            AND date = '{$date}'";
-
-        return $this->getDB()->exec($sql, $params);
-    }
+}
 
