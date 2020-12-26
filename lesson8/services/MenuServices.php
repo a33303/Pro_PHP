@@ -10,8 +10,7 @@ class MenuServices
     <li><a href="/?c=user&a=index">Главная</a></li>
     <li><a href="/?c=good&a=all">Каталог</a></li>
     <li><a href="/?c=user&a=all">Все пользователи</a></li>
-    <li><a href="/?c=good&a=add">Добавить</a></li>
-    <li><a href="/?c=basket&a=add">Корзина</a></li>
+    <li><a href="/?c=user&a=add">Добавить</a></li>
 php;
 
         $dopMenu = <<<php

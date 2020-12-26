@@ -1,8 +1,7 @@
 {
     "require": {
         "twig/twig": "^2.13",
-        "phpunit/phpunit": "^8.5",
-      "ext-pdo": "*"
+        "phpunit/phpunit": "^8.5"
     },
     "autoload": {
         "psr-4": {

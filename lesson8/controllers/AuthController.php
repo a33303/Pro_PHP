@@ -3,16 +3,18 @@
 namespace App\controllers;
 
 use App\models\User;
+use App\services\UserServices;
 
 class AuthController extends Controller
 {
     /**
-     * Регистрация пользователя
+     * Lj,fdktybt
+     *
      * @return string
      */
     public function addAction()
     {
-        if ($this->request->methodIsGet()) {
+        if ($this->methodIsGet()) {
             return $this->render('auth_add');
         }
 
@@ -23,10 +25,6 @@ class AuthController extends Controller
         return '';
     }
 
-    /**
-     * Авторизация пользователя
-     * @return string
-     */
     public function inAction()
     {
         if (!empty($this->request->getSession('user'))) {
@@ -34,7 +32,7 @@ class AuthController extends Controller
             return '';
         }
 
-        if ($this->request->methodIsGet()) {
+        if ($this->methodIsGet()) {
             return $this->render('auth_in');
         }
 
@@ -50,36 +48,13 @@ class AuthController extends Controller
         $this->setMSG('Вы авторизованы');
         $this->request->redirectOnUrl('/');
         return '';
-
-
     }
 
-    /**
-     * Окончание сессии
-     * @return string
-     */
     public function exitAction()
     {
         $this->request->setSession('user', '');
         $this->request->redirectOnUrl('/');
         return '';
-    }
-
-    public function isAdmin()
-    {
-        $user = $this->request->getSession('auth');
-
-        return !empty($user->getIsAdmin());
-    }
-
-    public function methodIsAuth()
-    {
-        if (!$this->isAdmin())
-        {
-            $this->request->methodIsGet();
-            return false;
-        }
-        return false;
     }
 
 }

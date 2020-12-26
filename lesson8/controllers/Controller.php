@@ -7,7 +7,6 @@ use App\services\MenuServices;
 use App\services\renders\IRenderer;
 use App\services\Request;
 
-
 abstract class Controller
 {
     protected $renderer;
@@ -21,7 +20,7 @@ abstract class Controller
         $this->container = $container;
     }
 
-    protected string $defaultAction = 'all';
+    protected $defaultAction = 'all';
 
     public function run($action)
     {
@@ -49,7 +48,7 @@ abstract class Controller
 
     protected function setMSG($msg)
     {
-        $_SESSION['MSG']=$msg;
+        $_SESSION['MSG'] = $msg;
     }
 
     protected function getMSG()
@@ -69,4 +68,8 @@ abstract class Controller
     }
 
 
+    public function methodIsGet()
+    {
+        return $this->request->methodIsGet();
+    }
 }

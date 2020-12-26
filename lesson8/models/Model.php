@@ -87,10 +87,4 @@ abstract class Model
     {
         return DB::instance();
     }
-
-    private function addImage(string $title, string $path)
-    {
-        $sql = "INSERT INTO images(title, path) VALUES ('{$title}','{$path}')";
-        return $this->getDB()->exec($sql);
-    }
 }

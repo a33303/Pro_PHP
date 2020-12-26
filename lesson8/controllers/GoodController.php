@@ -1,8 +1,8 @@
 <?php
 namespace App\controllers;
 
+use App\models\Comment;
 use App\models\Good;
-use App\models\Model;
 
 class GoodController extends Controller
 {
@@ -32,24 +32,62 @@ class GoodController extends Controller
 
     public function addAction()
     {
-        if ($this->request->methodIsGet()) {
-            return $this->render('good_add');
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            return $this->render('user_add');
+        }
+        $user = new User();
+        $user->login = $_POST['login'];
+        $user->password = $_POST['password'];
+        $user->save();
+    }
+    //доделать добавление товара addAction!!!
+
+    public function updateCommentAction()
+    {
+        if (empty($_GET['id'])) {
+            $this->setMSG('Не передан id');
+            header('Location: ?c=good&a=addComment');
+
+            return '';
         }
 
-        $id = $this -> getId();
-        (new GoodServices())->save(
-            $id,
-            $this->request->post()
-        );
+        $id = (int) $_GET['id'];
+        /** @var Comment $good */
+        $comment = (new Comment())->getOne($id);
 
-        $this->setMSG('Товар добавлен');
-        header('Location: ?c=good&a=all');
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            return $this->render(
+                'comment_update',
+                [
+                    'comment' => $comment
+                ]
+            );
+        }
 
-        return $this->render(
-            'addGood',
-            ['good' => new Good() ]
-        );
+        $comment->id = $_POST['id'];
+        $comment->name = $_POST['name'];
+        $comment->save();
 
+        $this->setMSG('Комментарий изменен');
+        header('Location: ?c=good&a=addComment&id' . $id);
+
+        return '';
     }
 
+    public function addCommentAction()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            return $this->render('comment_add');
+        }
+
+        $comment = new Comment();
+        $comment->id = $_POST['id'];
+        $comment->name = $_POST['name'];
+        $comment->save();
+
+        $this->setMSG('Комментарий добавлен');
+        header('Location: ?c=good&a=addComment&id' . $id);
+
+        return '';
+    }
 }

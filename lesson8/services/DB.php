@@ -10,7 +10,7 @@ class DB
     protected $config = [
         'driver' => 'mysql',
         'host' => '127.0.0.1',
-        'dbname' => 'mysql',
+        'dbname' => 'gdphp',
         'charset' => 'UTF8',
         'userName' => 'root',
         'password' => 'root',
