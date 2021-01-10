@@ -12,7 +12,7 @@ class Comment extends Model
 
     protected function getTableName(): string
     {
-        return 'comment';
+        return 'comments';
     }
 
 }

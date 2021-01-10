@@ -87,4 +87,21 @@ abstract class Model
     {
         return DB::instance();
     }
+
+    public function saveComment()
+    {
+        if (!empty($_POST['comment'])) {
+            $sql = sprintf("INSERT INTO comments text = ". $_POST['comment']);
+            if ($this->getDB()->exec($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    public function getComments()
+    {
+        $sql = sprintf("Select * from comments where good_id =". $_POST['id']);
+        return $this->getDB()->exec($sql);
+    }
 }
