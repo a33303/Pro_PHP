@@ -22,10 +22,12 @@ class GoodController extends Controller
     {
         $id = $this->getId();
         $good = (new Good())->getOne($id);
+       // $commentsList = ['1','2'];//(new Comment())->getComments();
         return $this->render(
             'good',
             [
                 'good' => $good,
+                //'comments' => $commentsList,
             ]
         );
     }
@@ -33,12 +35,12 @@ class GoodController extends Controller
     public function addAction()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            return $this->render('user_add');
+            return $this->render('good_add');
         }
-        $user = new User();
-        $user->login = $_POST['login'];
-        $user->password = $_POST['password'];
-        $user->save();
+        $good = new Good();
+        $good->name = $_POST['name'];
+        $good->price = $_POST['price'];
+        $good->save();
     }
     //доделать добавление товара addAction!!!
 
@@ -77,16 +79,21 @@ class GoodController extends Controller
     public function addCommentAction()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            return $this->render('comment_add');
+            return $this->render('good');
         }
 
         $comment = new Comment();
         $comment->id = $_POST['id'];
-        $comment->name = $_POST['name'];
-        $comment->save();
+        $comment->name = $_POST['comment'];
 
-        $this->setMSG('Комментарий добавлен');
-        header('Location: ?c=good&a=addComment&id' . $id);
+        if ($comment->saveComment()){
+            $this->setMSG('Комментарий добавлен');
+
+            header('Location: ?c=good&a=addComment&id' . $id);
+        }else{
+            header('Location: ?c=good&a=addComment&id' . $id);
+           $this->setMSG('Комментарий не добавлен');
+        }
 
         return '';
     }

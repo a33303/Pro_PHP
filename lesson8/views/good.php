@@ -1,5 +1,6 @@
 <?php
 /** @var \App\models\Good  $good*/
+/** @var \App\models\Comment  $comments*/
 ?>
 
 <h1>Товар: <?= $good->name ?></h1>
@@ -9,3 +10,11 @@
     <p><input type="submit" value="Отправить">
         <input type="reset" value="Очистить"></p>
 </form>
+
+<? var_dump($comments); if(isset($comments)):?>
+    <?php foreach ($comments as $comment): ?>
+        Тело коммента: <?= $comment->text?><br>
+        Название: <?= $comment->id?><br>
+        <hr>
+    <?php endforeach; ?>
+<? endif;?>
